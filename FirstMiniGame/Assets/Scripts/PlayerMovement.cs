@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody playerRb;
+    public Animator animator;
     public float forwardForce = 100f;
     public float sideForce = 100f;
 
@@ -34,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
 
         playerRb.AddForce((direction * sideForce * Time.deltaTime), 0f, 0f, ForceMode.VelocityChange);
 
-        if(playerRb.position.y < -1.5f)
+        if(playerRb.position.y < -1f)
         {
-
+            FindObjectOfType<GameManager>().GameOver();
         }
 
         //Movimiento primitivo

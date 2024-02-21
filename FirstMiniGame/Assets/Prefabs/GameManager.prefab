@@ -46,3 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayRestart: 10
   LevelCompleteUI: {fileID: 0}
+  GameOverUI: {fileID: 0}
+  playerIU:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

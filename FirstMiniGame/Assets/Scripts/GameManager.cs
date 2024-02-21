@@ -1,35 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public float delayRestart = 1f;
-    public GameObject LevelCompleteUI; 
-    private bool gameHasEnded = false;
+    public GameObject LevelCompleteUI;
+    public GameObject GameOverUI;
+    public GameObject[] playerIU;
+    private bool levelPassed = false;
 
     public void GameOver()
     {
-        if (!gameHasEnded)
+        if (!levelPassed)
         {
-            gameHasEnded = true;
             Debug.Log("GAME OVER");
-
-            Invoke("Restart", delayRestart);
+            OffPlayerUI();
+            Invoke("Retry", 1f);
+            Invoke("ReloadLevel", 3f);
         }
     }
 
     public void LevelComplete()
     {
+        levelPassed = true;
         Debug.Log("Level Completed!");
+        OffPlayerUI();
         LevelCompleteUI.SetActive(true);
 
-        Invoke("Restart", delayRestart);
+
     }
 
-    private void Restart()
+    private void OffPlayerUI()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        foreach (var ui in playerIU)
+        {
+            ui.SetActive(false);
+        }
     }
+   
+    void Retry()
+    {
+        GameOverUI.SetActive(true);
+    }
+
+    void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 }
